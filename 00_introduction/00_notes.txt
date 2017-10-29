@@ -7,4 +7,4 @@
 the -o tells the compiler we want an executable file prog made from the three
 g++ -o prog file1.cpp file2.cpp file3.cpp
 
-g++ is a C++ comiler, gcc is a C compiler
+g++ is a C++ compiler, gcc is a C compiler

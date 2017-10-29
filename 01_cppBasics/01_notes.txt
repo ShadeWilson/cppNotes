@@ -1,0 +1,31 @@
+Learn C++
+Chapter 1: C++ Basics
+Notes by Shade Wilson
+From LearnCpp.com
+Oct 18, 2016
+
+########## 1.1 ###############
+Statements in C++ are terminated with a ; (dont forget!!)
+All variables must be declared before they can be used
+
+Helpful hint: It’s a good idea to put your main() function in
+a .cpp file named either main.cpp, or with the same name as your project.
+For example, if you are writing a Chess game, you could put your main()
+function in chess.cpp.
+
+One of the most commonly used parts of the C++ standard library is
+is the iostream library, which contains functionality to write/read
+to/from the screen
+
+Compile and run helloWorld:
+shadewilson $ g++ -o helloWorld helloWorld.cpp
+shadewilson $ ./helloWorld
+
+########### 1.2 - Comments #############
+/* This is a multi-line /* comment */ this is not inside the comment */
+// The above comment ends at the first */, not the second */
+
+Comments do not nest
+
+########### 1.3 - A first look at variables, initialization, assignment
+an object is a piece of memory that can be used to store values
