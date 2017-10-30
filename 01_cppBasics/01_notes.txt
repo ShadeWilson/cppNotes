@@ -74,3 +74,26 @@ Rule: When giving variables an initial value, favor initialization over assignme
 
 Caution: uninitialized variables take on any value the was previously
 assigned to that memory location (garbage)!
+
+To print multiple things on a line, the output operator can be used
+multiple times
+
+std::cout << "x is equal to: " << x;
+
+std::endl can be used as \n (newline)
+
+std::cin is the opposite of std::cout
+reads input from the command line using the input operator >>
+
+
+HOW TO REMEMBER which operator to USE:
+
+<< is used with std::cout and shows the direction that data is moving from
+the r-value to the console
+
+std::cout << 4 moves the value of 4 to the console
+
+>> is used with std::cin and shows the direction that data is moving from the
+console into the variable
+
+std::cin >> x moves the value from the console into x
