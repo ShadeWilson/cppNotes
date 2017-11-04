@@ -97,3 +97,21 @@ std::cout << 4 moves the value of 4 to the console
 console into the variable
 
 std::cin >> x moves the value from the console into x
+
+
+############## 1.4 - A first look at functions and return values
+
+Don't forget the parentheses when making a function call
+
+Why return a value back to the OS in int main()?
+THe value is called the status code, it tells the OS (and any other programs)
+whether your program executed successfully or not.
+
+0 == success
+1 (or any positive number) == failure
+
+The C++ standard explicitly states that main must return an int. However, if you
+do not provide a return statement in main(), the compiler will return 0 on your behalf.
+But it is best practice to return a value from main().
+
+You should also define main function at the bottom of your code file.
