@@ -104,7 +104,7 @@ std::cin >> x moves the value from the console into x
 Don't forget the parentheses when making a function call
 
 Why return a value back to the OS in int main()?
-THe value is called the status code, it tells the OS (and any other programs)
+The value is called the status code, it tells the OS (and any other programs)
 whether your program executed successfully or not.
 
 0 == success
@@ -115,3 +115,11 @@ do not provide a return statement in main(), the compiler will return 0 on your 
 But it is best practice to return a value from main().
 
 You should also define main function at the bottom of your code file.
+
+If a function as anon-void return type, it must return a value of that type.
+The only exception is main() which will return 0 if a return statement is not
+provided. A function can only return a single value back to the caller.
+
+NESTED FUNCTIONS
+
+Functions cannot be nested inside of other functions in C++.
