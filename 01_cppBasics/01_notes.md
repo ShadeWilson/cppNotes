@@ -2,9 +2,9 @@
 
 ## Chapter 1: C++ Basics
 
-Notes by Shade Wilson
-From LearnCpp.com
-Oct 18, 2016
+Notes by Shade Wilson from LearnCpp.com
+
+*Oct 18, 2016*
 
 ### 1.1
 Statements in C++ are terminated with a ; (dont forget!!)
@@ -19,7 +19,7 @@ One of the most commonly used parts of the C++ standard library is
 is the iostream library, which contains functionality to write/read
 to/from the screen
 
-Compile and run helloWorld:
+Compile and run the C++ program 'helloWorld':
 
 ```
 shadewilson $ g++ -o helloWorld helloWorld.cpp
@@ -248,6 +248,8 @@ USE DESCRIPTIVE NAMES!!
 | int monstersKilled	| Good	| Descriptive |
 | int x, y	| Bad*	| Generally bad unless use is trivial, such as in trivial mathematical functions |
 
+
+### 1.4d - First look at local scope
 
 
 
