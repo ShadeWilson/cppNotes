@@ -162,3 +162,17 @@ call is made.
 printValue(6); // 6 is the argument passed to function printValue()
 add(2, 3); // 2 and 3 are the arguments passed to function add()
 ```
+
+When a function is called, the arguments passed in are copied to local variables.
+This is called pass by value.
+
+#### Quiz
+
+1) Void functions can't have a return value
+2) Non-void functions must have a return statement, all parameters must be passed values
+3) 24
+
+
+
+
+
