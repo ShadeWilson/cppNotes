@@ -272,6 +272,40 @@ int main()
 Rule: *names used for function parameters or variables inside the function are only 
 visible within the function that declares them.*
 
+### 1.5 - First look at operators
+
+| Term | Explanation |
+| ---- | ----------- | 
+| Expression | a combination of literals, variables, functions, and operators that
+evaluates to a value | 
+| Literal | Fixed value that has been inserted (hardcoded) directly into source code. Ex: 5, 3.14. Always evaluates to itself |
+| Operand | A literal, variable, or function that return a value. Supplies that data that the expression works with | 
+| Operators | Tell the expression how to combine 1 or more operands to produce a new result. Ex: +, -, =, |
+
+Operators come in three types:
+
+1) Unary: act on one operand. Ex: the negative operator (-) in -5.
+2) Binary: acts on two operands, left and right. Ex: +
+3) Ternary: act on three operands. Only one in C++
+
+Some operators, like the - operator, have more than one meaning depending on the context.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
