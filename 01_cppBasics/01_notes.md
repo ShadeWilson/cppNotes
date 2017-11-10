@@ -1,5 +1,7 @@
 #Learn C++
+
 ##Chapter 1: C++ Basics
+
 Notes by Shade Wilson
 From LearnCpp.com
 Oct 18, 2016
@@ -18,11 +20,14 @@ is the iostream library, which contains functionality to write/read
 to/from the screen
 
 Compile and run helloWorld:
+
 `shadewilson $ g++ -o helloWorld helloWorld.cpp`
+
 `shadewilson $ ./helloWorld`
 
 ### 1.2 - Comments
 `/* This is a multi-line /* comment */ this is not inside the comment */`
+
 `// The above comment ends at the first */, not the second */`
 
 Comments do not nest
@@ -74,6 +79,7 @@ x = 5; // assign the value 5 to variable x
 ```
 
 C++ lets you define a var and assign an initial value in one step (initialization)
+
 `int x = 5; // initialize variable x with the value 5`
 
 Rule: When giving variables an initial value, favor initialization over assignment.
@@ -86,9 +92,7 @@ multiple times
 
 ```
 std::cout << "x is equal to: " << x;
-
 std::endl can be used as \n (newline)
-
 std::cin is the opposite of std::cout
 ```
 reads input from the command line using the input operator >>
