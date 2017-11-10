@@ -251,8 +251,26 @@ USE DESCRIPTIVE NAMES!!
 
 ### 1.4d - First look at local scope
 
+Function parameters and variables defined inside the function body both have 
+local scope, meaning those variables can only be seen and used within the function that
+defines them.
 
+```c++
+#include <iostream>
+ 
+int main()
+{
+    int x; // variable x is created here
+    std::cout << "Enter a value for x: ";
+    std::cin >> x;
+    std::cout << "You entered: " << x << std::endl;
+ 
+    return 0;
+} // variable x is destroyed here
+```
 
+Rule: *names used for function parameters or variables inside the function are only 
+visible within the function that declares them.*
 
 
 
