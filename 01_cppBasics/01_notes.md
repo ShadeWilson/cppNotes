@@ -1,14 +1,14 @@
 # Learn C++
 
-## Chapter 1: C++ Basics
-
 Notes by Shade Wilson from LearnCpp.com
 
 *Oct 18, 2016*
 
-### 1.1
-Statements in C++ are terminated with a ; (dont forget!!)
-All variables must be declared before they can be used
+## Chapter 1: C++ Basics
+
+### 1.1 - Structure of a program 
+Statements in C++ are terminated with a ; (dont forget!!). All variables must 
+be declared before they can be used
 
 Helpful hint: It’s a good idea to put your main() function in
 a .cpp file named either main.cpp, or with the same name as your project.
@@ -27,9 +27,13 @@ shadewilson $ ./helloWorld
 ```
 
 ### 1.2 - Comments
-`/* This is a multi-line /* comment */ this is not inside the comment */`
+```c++
+/* This is a multi-line /* comment */ this is not inside the comment */`
+```
 
-`// The above comment ends at the first */, not the second */`
+```c++
+// The above comment ends at the first */, not the second */`
+```
 
 Comments do not nest
 
@@ -81,7 +85,9 @@ x = 5; // assign the value 5 to variable x
 
 C++ lets you define a var and assign an initial value in one step (initialization)
 
-`int x = 5; // initialize variable x with the value 5`
+```c++
+int x = 5; // initialize variable x with the value 5`
+``
 
 Rule: When giving variables an initial value, favor initialization over assignment.
 
@@ -121,13 +127,13 @@ The value is called the status code, it tells the OS (and any other programs)
 whether your program executed successfully or not.
 
 0 == success
+
 1 (or any positive number) == failure
 
 The C++ standard explicitly states that main must return an int. However, if you
 do not provide a return statement in main(), the compiler will return 0 on your behalf.
-But it is best practice to return a value from main().
-
-You should also define main function at the bottom of your code file.
+But it is best practice to return a value from main(). You should also define main 
+function at the bottom of your code file.
 
 If a function as anon-void return type, it must return a value of that type.
 The only exception is main() which will return 0 if a return statement is not
@@ -276,17 +282,16 @@ visible within the function that declares them.*
 
 | Term | Explanation |
 | ---- | ----------- | 
-| Expression | a combination of literals, variables, functions, and operators that
-evaluates to a value | 
+| Expression | a combination of literals, variables, functions, and operators that evaluates to a value | 
 | Literal | Fixed value that has been inserted (hardcoded) directly into source code. Ex: 5, 3.14. Always evaluates to itself |
 | Operand | A literal, variable, or function that return a value. Supplies that data that the expression works with | 
 | Operators | Tell the expression how to combine 1 or more operands to produce a new result. Ex: +, -, =, |
 
 Operators come in three types:
 
-1) Unary: act on one operand. Ex: the negative operator (-) in -5.
-2) Binary: acts on two operands, left and right. Ex: +
-3) Ternary: act on three operands. Only one in C++
+1) **Unary:** act on one operand. Ex: the negative operator (-) in -5.
+2) **Binary:** acts on two operands, left and right. Ex: +
+3) **Ternary:** act on three operands. Only one in C++
 
 Some operators, like the - operator, have more than one meaning depending on the context.
 
