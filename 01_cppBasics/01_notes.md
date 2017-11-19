@@ -335,7 +335,93 @@ std::cout << "Hello
 
 C++ does not enforce any kind of formatting restrictions. A basic rule of thumb is that the best styles produce the most readable code and are the most consistent.
 
+### 1.7 - Forward declarations and definitions
 
+```c++
+#include <iostream>
+ 
+int main()
+{
+    std::cout << "The sum of 3 and 4 is: " << add(3, 4) << std::endl;
+    return 0;
+}
+ 
+int add(int x, int y)
+{
+    return x + y;
+}
+```
+
+The expected output of the following program would be `The sum of 3 and 4 is: 7` but it's not! In fact, it doesn't compile at all. This is because the compiler reads files sequentially. When the compiler reaches the line where `add()` is used in `main()`, it doesn't know what `add()` is because we haven't defined the function yet.
+
+There's two common ways to fix this issue. The first would be to reorder the program so that `add()` is declared before `main()`. This way, when the compiler reaches `add()` being used in `main()`, it'll already know what the function is.  This change is relatively simple but can be tedious for large programs.
+
+In some cases, this isn't possible. If two functions (A and B) both call each other, there's no way to order the function definitions correctly.
+
+An option to deal with this is to use a forward declaration.
+
+**Forward declaration:** allows us to tell the compiler about the existence of an identifier before actually defining the identifier.
+
+To write a forward declaration of a function, use a declaration statement called a **function prototype**: has functions return type, name, parameters, but not body. It's a statement so must end with a semicolon
+
+```c++
+int add(int x, int y); // function prototype includes return type, name, parameters, and semicolon.  No function body!
+```
+
+If this is added to the top of the program defined above, now it'll compile!
+
+```c++
+#include <iostream>
+ 
+int add(int x, int y); // forward declaration of add() (using a function prototype)
+ 
+int main()
+{
+    std::cout << "The sum of 3 and 4 is: " << add(3, 4) << std::endl; // this works because we forward declared add() above
+    return 0;
+}
+ 
+int add(int x, int y) // even though the body of add() isn't defined until here
+{
+    return x + y;
+}
+```
+
+Now when the compiler reaches `add()` in `main()`, it'll know what `add()` looks like and it won't complain anymore.
+
+**Note**: you don't actually have to specify the names of the parameters:
+
+```c++
+int add(int, int);
+```
+
+Forward declarations are usually used for functions, but can be used for other identifiers like variables and user-defined types, which have different syntax.
+
+**Declarations vs definitions**
+
+**Definition**: actually implements or instantiates (causes memory to be allocated for) the identifier. Examples:
+
+```c++
+int add(int x, int y) // defines function add()
+{
+    return x + y;
+}
+ 
+int x; // instantiates (causes memory to be allocated for) an integer variable named x
+```
+
+You can only have one definition per identifier. A definition is needed to satisfy the linker.
+
+**Declaration**: a statement that announces an identifier and its type. Examples:
+
+```c++
+int add(int x, int y); // declares a function named "add" that takes two int parameters and returns an int.  No body!
+int x; // declares an integer variable named x
+```
+
+A declaration is all that's needed to satisfy a compiler. BUT if you forget the definition for the identifier, the linker will complain.
+
+Note that `int x` appears in both examples. In C++, all definitions also serve as declarations. This is the case for most declarations; however, there is a small subset of declarations that are not definitions, like function prototypes. These are called **pure declarations**. 
 
 
 
