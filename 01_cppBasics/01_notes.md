@@ -295,6 +295,47 @@ Operators come in three types:
 
 Some operators, like the - operator, have more than one meaning depending on the context.
 
+### 1.6 - White space and basic formatting
+
+C++ compiler generally ignores whitespace. All of these compile fine and do the same thing:
+
+```c++
+std::cout << "Hello world!";
+ 
+std::cout               <<            "Hello world!";
+ 
+		std::cout << 		"Hello world!";
+ 
+std::cout
+	<< "Hello world!";
+```
+
+All of these functions do the same thing too:
+
+```c++
+int add(int x, int y) { return x + y; }
+ 
+int add(int x, int y) {
+    return x + y; }
+ 
+int add(int x, int y)
+{    return x + y; }
+ 
+int add(int x, int y)
+{
+    return x + y;
+}
+```
+The one exception is inside a string itself. Also, newlines are not allowed in quoted text:
+
+```c++
+std::cout << "Hello
+     world!" << std::endl; // Not allowed!
+```
+
+C++ does not enforce any kind of formatting restrictions. A basic rule of thumb is that the best styles produce the most readable code and are the most consistent.
+
+
 
 
 
