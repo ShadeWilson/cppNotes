@@ -423,13 +423,120 @@ A declaration is all that's needed to satisfy a compiler. BUT if you forget the 
 
 Note that `int x` appears in both examples. In C++, all definitions also serve as declarations. This is the case for most declarations; however, there is a small subset of declarations that are not definitions, like function prototypes. These are called **pure declarations**. 
 
+### 1.8 - Programs with multiple files
+
+From command line: When you compile your program, you’ll need to include all of the relevant code files on the compile line. For example: `g++ main.cpp add.cpp -o main`, where main.cpp and add.cpp are the names of the code files and main is the output file.
+
+Need to use a forward declaration to get another file to work on main.
+
+```c++
+#include <iostream>
+ 
+int add(int x, int y); // needed so main.cpp knows that add() is a function declared elsewhere
+ 
+int main()
+{
+    std::cout << "The sum of 3 and 4 is: " << add(3, 4) << std::endl;
+    return 0;
+}
+```
+
+Now the compiler will know about add() when compiling main.cpp.
+
+### 1.8b - Naming conflicts and the std namespace
+
+All identifiers must be non-ambiguous in C++.
+
+Rule: When you use an identifier in a namespace, you always have to identify the namespace along with the identifier
+
+### 1.9 - Header files
+
+A header file or and include file usually have a .h extension but can also have a .hpp extension or none at all. Their purpose is to hold declarations for other files to use so you don't have to forward declare every individual function you want.
+
+**Using standard library header files:**
+
+```c++
+#include <iostream>
+int main() {
+    std::cout << "Hello, world!" << std::endl;
+    return 0;
+}
+```
+
+This program never defines cout but can still use it because it is declared in a header file called `iostream`.
 
 
+What we had before:
+
+add.cpp
+
+```c++
+int add(int x, int y) {
+    return x + y;
+}
+```
+
+main.cpp
+
+```c++
+#include <iostream>
+int add(int x, int y);
+
+int main() {
+  std::cout << "The sum of 3 and 4 is " << add(3, 4) << std::endl;
+  return 0;
+}
+```
+
+But writing forward declarations for all the functions we want gets tedious. Header files can help! They only need to be written once and can include as many files as needed.
+
+Header files consist of two parts:
+
+1) **Header guard:** prevents a given header file from being #included more than once.
+
+1) The actual content of the header file, which should be the declarations for all the functions we want other files to be able to see.
+
+Ex: add.h
+
+```c++
+// This is start of the header guard.  ADD_H can be any unique name.  By convention, we use the name of the header file.
+#ifndef ADD_H
+#define ADD_H
+ 
+// This is the content of the .h file, which is where the declarations go
+int add(int x, int y); // function prototype for add.h -- don't forget the semicolon!
+ 
+// This is the end of the header guard
+#endif
+```
+
+We have to include the .h file in order to use it.
 
 
+add.cpp stays the same. main.cpp:
+```c++
+#include <iostream>
+#include "add.h"
+ 
+int main()
+{
+    std::cout << "The sum of 3 and 4 is " << add(3, 4) << std::endl;
+    return 0;
+}
+```
 
+Angled brackets tell the compiler that we are including a header file that was included with the compiler. Double quotes tells the compiler that we are suppling the header file.
 
+Rule: Each .cpp file should explicitly #include all of the header files it needs to compile.
 
+**Header file best practices**
+-Always include header guards.
+-Do not define variables in header files unless they are constants. Header files should generally only be used for declarations.
+-Do not define functions in header files.
+-Each header file should have a specific job, and be as independent as possible. For example, you might put all your declarations related to functionality A in A.h and all your declarations related to functionality B in B.h. That way if you only care about A later, you can just include A.h and not get any of the stuff related to B.
+-Give your header files the same name as the source files they’re associated with (e.g. grades.h goes with grades.cpp).
+-Try to minimize the number of other header files you #include in your header files. Only #include what is necessary.
+-Do not #include .cpp files.
 
 
 
