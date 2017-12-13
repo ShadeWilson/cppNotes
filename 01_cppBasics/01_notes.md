@@ -531,13 +531,105 @@ Rule: Each .cpp file should explicitly #include all of the header files it needs
 
 **Header file best practices**
 -Always include header guards.
+
 -Do not define variables in header files unless they are constants. Header files should generally only be used for declarations.
+
 -Do not define functions in header files.
+
 -Each header file should have a specific job, and be as independent as possible. For example, you might put all your declarations related to functionality A in A.h and all your declarations related to functionality B in B.h. That way if you only care about A later, you can just include A.h and not get any of the stuff related to B.
+
 -Give your header files the same name as the source files they’re associated with (e.g. grades.h goes with grades.cpp).
+
 -Try to minimize the number of other header files you #include in your header files. Only #include what is necessary.
+
 -Do not #include .cpp files.
 
+### 1.10 - First look at the processor
+
+Preprocessor: separate function that runs just before the compiler when you compile your program. Looks for directives: specific instructions that start with a # and end with a newline (no semi colon!). All text changes happen temporarily in-memory
+
+`#include` is a directive.
+
+`#define` can be used to create a **macro**: a rule that defines how an input sequence (ex: an identifier) is converted into a replacement output sequence. Two types: object-like macros and function-like macros (considered dangerous). Object-like macros look like 
+
+```cpp
+#define IDENTIFIER
+#define IDENTIFIER substitution_text
+```
+
+When the preprocessor encounters this directive, any further occurance of `identifier` is replaced by `substitution_text`. The identifier is typically in all-caps with underscores for spaces. Frowned upon. The preprocessor turns this:
+
+```cpp
+#define MY_FAVORITE_NUMBER 9
+ 
+std::cout << "My favorite number is: " << MY_FAVORITE_NUMBER << std::endl;
+```
+
+into
+
+```cpp
+std::cout << "My favorite number is: " << 9 << std::endl;
+```
+
+Object-like macros can also be defined without substitution text. Any further occurance is replaced with nothing!! Acceptable
+
+**Conditional compilation**
+
+These preprocessor directives allow you to specify under which conditions something will or wont compile: `#ifdef`, `#ifndef`, `#endif`
+
+`#ifdef` allows the preprocessor to check whether a value has been previously #defined. If it has, the code between `#ifdef` and `#endif` is compiled. Otherwise, code is ignored. `#ifndef` is the opposite of `#ifdef`
+
+```cpp 
+#define PRINT_JOE
+
+#ifdef PRINT_JOE
+std::cout < "Joe" << std::endl;
+#endif
+
+#ifdef PRINT_BOB
+std::cout << "Bob" << std::endl;
+#endif
+```
+
+
+`PRINT_JOE` isn't replaced with nothing because macros only cause text substitution in normal code.
+
+
+Directives found in one code file do not have an impact on other code files in the same project.
+
+
+function.cpp 
+
+```cpp 
+#include <iostream>
+ 
+void doSomething()
+{
+#ifdef PRINT
+    std::cout << "Printing!";
+#endif
+#ifndef PRINT
+    std::cout << "Not printing!";
+#endif
+}
+```
+
+main.cpp 
+
+```cpp 
+void doSomething(); // forward declaration for function doSomething()
+ 
+int main()
+{
+#define PRINT
+ 
+    doSomething();
+ 
+    return 0;
+}
+```
+
+Result is: `Not printing!`. Defining print in main.cpp has no effect on function.cpp. However, directives defined in a header file can be #included in multiple other files, so this is a way to define a set of directives for general use.
 
 
 
