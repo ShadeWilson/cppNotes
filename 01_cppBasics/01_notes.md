@@ -629,10 +629,155 @@ int main()
 }
 ```
 
-Result is: `Not printing!`. Defining print in main.cpp has no effect on function.cpp. However, directives defined in a header file can be #included in multiple other files, so this is a way to define a set of directives for general use.
+Result is: `Not printing!`. Defining print in main.cpp has no effect on function.cpp. However, directives defined in a header file can be #included in multiple other files, so this is a way to define a set of directives for general use. 
 
 
+### 1.10a - Header guards
 
+Rmember, an identifier can only have one definition. A program like the one below that has two (or more) definitions of a variable will not compile.
+
+```c++
+int main() {
+  int x; // define identifier "x"
+  int x; // compiler error!
+  
+  return 0;
+}
+```
+
+SImilarly, programs that define a function more than once will throw an error. These problems can be easy to fix with a header file, but it's easy to get into a situation where a header file is included more than once. Ex:
+
+`math.h`
+
+```c++
+int getSquareSides() {
+  return 4
+}
+```
+
+`geometry.h`
+
+```c++
+#include "math.h"
+```
+
+`main.cpp`
+
+```c++
+#include "math.h"
+#include "geometry.h"
+
+int main() {
+  return 0;
+}
+```
+
+This doesn't compile! Because math.h contains a definition and is also #included in `geometry.h`, so `getSquareSides` is defined twice.
+
+How to resolve this issue? **Header guards** (include guards). Header guards are conditionally compiled directives that look like:
+
+```c++
+#ifndef SOME_UNIQUE_NAME_HERE
+#define SOME_UNIQUE_NAME_HERE
+ 
+// your declarations and definitions here
+ 
+#endif
+```
+
+*All your header files should have header guards in them.* Typically the name of the header file with a \_H appended to it is used. `math.h`'s header guard would look like:
+
+```c++
+#ifndef MATH_H
+#define MATH_H
+
+int getSquareSides() {
+  return 4
+}
+ 
+#endif
+```
+
+Previous example but with header guards:
+
+`math.h`
+
+```c++
+#ifndef MATH_H
+#define MATH_H
+
+int getSquareSides() {
+  return 4;
+}
+
+#endif
+```
+
+`geometry.h`
+
+```c++
+#include "math.h"
+```
+
+`main.cpp`
+
+```c++
+#include "math.h"
+#include "geometry.h"
+
+int main() {
+  
+  return 0;
+}
+```
+
+
+Header guards will not prevent a header from being included once into different code files. Work arounds. One way is to put the function definition in one of the .cpp files so the header jsut containsa forward declaration.
+
+`square.h`
+
+```c++
+#ifndef SQUARE_H
+#define SQUARE_H
+
+int getSquareSides(); // forward declaration 1
+int getSquarePerimeter(int sideLength) // forward declaration 2
+
+#endif
+```
+
+`square.cpp`
+
+```c++
+// It would be okay to #include square.h here if needed
+// This program doesn't need to.
+ 
+int getSquareSides() { // actual definition for getSquareSides
+
+    return 4;
+}
+ 
+int getSquarePerimeter(int sideLength) {
+    return sideLength * getSquareSides();
+}
+```
+
+`main.cpp`
+
+```c++
+#include <iostream>
+#include "square.h"
+
+int main() {
+  std::cout << "a square has " << getSquareSides() << "sides" << std::endl;
+  std::cout << "a square of length 5 has perimeter length " << getSquarePerimeter(5) << std::endl;
+
+  return 0;
+}
+
+```
+
+\#pragma once serves the same purpose as a header guard and is shorted and less error prone. But not officially part of the c++ language! Not all compilers support it, although most modern ones do.
 
 
 
